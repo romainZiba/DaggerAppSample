@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DaggerAppSample</string>
+    <string name="author">author</string>
+    <string name="title">Title</string>
+</resources>
