@@ -8,18 +8,28 @@ import java.util.Date;
 
 public class Book {
 
+    private int id;
     private String author;
     private String title;
     private String description;
     private String theme;
     private Date releaseDate;
 
-    public Book(String author, String title, String description, String theme, Date releaseDate) {
+    public Book(int id, String author, String title, String description, String theme, Date releaseDate) {
         this.author = author;
         this.title = title;
         this.description = description;
         this.theme = theme;
         this.releaseDate = releaseDate;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAuthor() {

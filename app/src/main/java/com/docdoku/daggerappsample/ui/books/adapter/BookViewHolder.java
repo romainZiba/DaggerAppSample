@@ -1,14 +1,12 @@
-package com.docdoku.daggerappsample;
+package com.docdoku.daggerappsample.ui.books.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-/**
- * Created by romainz on 20/03/18.
- */
+import com.docdoku.daggerappsample.R;
 
-public class BookViewHolder extends RecyclerView.ViewHolder {
+public class BookViewHolder extends RecyclerView.ViewHolder implements IBookViewHolder {
     private View mView;
 
     public BookViewHolder(View itemView) {

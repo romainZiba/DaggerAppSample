@@ -1,25 +1,20 @@
-package com.docdoku.daggerappsample;
+package com.docdoku.daggerappsample.ui.books.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.docdoku.daggerappsample.model.Book;
+import com.docdoku.daggerappsample.R;
+import com.docdoku.daggerappsample.ui.books.IBooksPresenter;
 
-import java.util.List;
-
-/**
- * Created by romainz on 20/03/18.
- */
 public class BooksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Book> mBooks;
+    private IBooksPresenter mPresenter;
 
-    public BooksAdapter(List<Book> books) {
-        mBooks = books;
+    public BooksAdapter(IBooksPresenter presenter) {
+        mPresenter = presenter;
     }
 
     @NonNull
@@ -31,10 +26,7 @@ public class BooksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Book book = mBooks.get(position);
-        ((BookViewHolder) holder).setAuthor(book.getAuthor());
-        ((BookViewHolder) holder).setTitle(book.getTitle());
-
+        mPresenter.onBindBooksView(position, (IBookViewHolder) holder);
     }
 
     @Override
@@ -44,7 +36,7 @@ public class BooksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mBooks.size();
+        return mPresenter.getBooksCount();
     }
 
 }
