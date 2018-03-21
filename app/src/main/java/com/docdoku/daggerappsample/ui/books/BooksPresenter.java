@@ -11,13 +11,17 @@ import java.util.List;
 public class BooksPresenter implements IBooksPresenter {
 
     private List<Book> mBooks = new ArrayList<>();
+
+    //TODO: use dependency injection to acquire an instance of IDataManager and ISchedulerProvider
     private IDataManager mDataManager;
     private IBooksView mView;
 
-    //TODO: use dependency injection to acquire an instance of IDataManager and ISchedulerProvider
-    private IDataManager dataManager = new FakeDataManager();
 
     public BooksPresenter() {
+        mDataManager = new FakeDataManager();
+    }
+
+    public BooksPresenter(IDataManager dataManager) {
         mDataManager = dataManager;
     }
 
@@ -39,6 +43,7 @@ public class BooksPresenter implements IBooksPresenter {
         Book book = mBooks.get(position);
         holder.setAuthor(book.getAuthor());
         holder.setTitle(book.getTitle());
+        holder.setListener();
     }
 
     @Override
@@ -49,5 +54,11 @@ public class BooksPresenter implements IBooksPresenter {
     @Override
     public void onUnbind() {
         mView = null;
+    }
+
+
+    @Override
+    public void onItemClicked(int adapterPosition) {
+        mView.showBookDetails(mBooks.get(adapterPosition));
     }
 }

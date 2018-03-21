@@ -16,6 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.bookdetails.BookDetailsActivity"
+            android:label="@string/title_activity_book_details"
+            android:parentActivityName=".ui.books.BooksActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.docdoku.daggerappsample.ui.books.BooksActivity" />
+        </activity>
     </application>
 
 </manifest>

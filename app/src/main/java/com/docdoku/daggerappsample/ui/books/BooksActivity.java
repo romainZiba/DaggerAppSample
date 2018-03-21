@@ -1,11 +1,14 @@
 package com.docdoku.daggerappsample.ui.books;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
 import com.docdoku.daggerappsample.R;
+import com.docdoku.daggerappsample.model.Book;
+import com.docdoku.daggerappsample.ui.bookdetails.BookDetailsActivity;
 import com.docdoku.daggerappsample.ui.books.adapter.BooksAdapter;
 
 public class BooksActivity extends AppCompatActivity implements IBooksView {
@@ -41,5 +44,10 @@ public class BooksActivity extends AppCompatActivity implements IBooksView {
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.onUnbind();
+    }
+
+    @Override
+    public void showBookDetails(Book book) {
+        startActivity(new Intent(this, BookDetailsActivity.class));
     }
 }

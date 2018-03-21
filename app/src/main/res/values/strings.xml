@@ -2,4 +2,5 @@
     <string name="app_name">DaggerAppSample</string>
     <string name="author">author</string>
     <string name="title">Title</string>
+    <string name="title_activity_book_details">BookDetailsActivity</string>
 </resources>

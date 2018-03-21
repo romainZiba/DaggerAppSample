@@ -8,4 +8,5 @@ public interface IBooksPresenter {
     void onBindBooksView(int position, IBookViewHolder holder);
     void bind(IBooksView view);
     void onUnbind();
+    void onItemClicked(int adapterPosition);
 }
