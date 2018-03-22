@@ -3,6 +3,8 @@ package com.docdoku.daggerappsample.ui.books;
 import com.docdoku.daggerappsample.data.FakeDataManager;
 import com.docdoku.daggerappsample.data.IDataManager;
 import com.docdoku.daggerappsample.model.Book;
+import com.docdoku.daggerappsample.rx.AndroidAppSchedulers;
+import com.docdoku.daggerappsample.rx.AppSchedulers;
 import com.docdoku.daggerappsample.ui.books.adapter.IBookViewHolder;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class BooksPresenter implements IBooksPresenter {
     //TODO: use dependency injection to acquire an instance of IDataManager and ISchedulerProvider
     private IDataManager mDataManager;
     private IBooksView mView;
+    private AppSchedulers appSchedulers = new AndroidAppSchedulers();
 
 
     public BooksPresenter() {
@@ -27,10 +30,15 @@ public class BooksPresenter implements IBooksPresenter {
 
     @Override
     public void loadBooks() {
-        mBooks = mDataManager.getBooks();
-        if (mView != null) {
-            mView.notifyDataChanged();
-        }
+        mDataManager.getBooks()
+                .subscribeOn(appSchedulers.newThread())
+                .observeOn(appSchedulers.ui())
+                .subscribe(books -> {
+                    mBooks = books;
+                    if (mView != null) {
+                        mView.notifyDataChanged();
+                    }
+                }, throwable -> System.out.println("Error occured"));
     }
 
     @Override
